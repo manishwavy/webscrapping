@@ -1,6 +1,8 @@
 <?php
+
+require 'vendor/autoload.php';
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
+header('Content-Disposition: attachment; filename="download-data.csv"');
 fputcsv(
     fopen('php://output', 'w+'),
     array(
@@ -17,10 +19,6 @@ fputcsv(
         'Year Incorporated'
     )
 );
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-require 'vendor/autoload.php';
 $httpClient = new \GuzzleHttp\Client();
 $response = $httpClient->get('https://www.floridaleagueofcities.com/research-resources/municipal-directory/');
 $htmlString = (string) $response->getBody();
